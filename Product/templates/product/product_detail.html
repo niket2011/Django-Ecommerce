@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+    <div class='row'>
+        <div class='col-12 col-md-6'>
+<h1>{{ object.name }}</h1>
+        <h2>Price:-{{ object.price }}</h2>
+        <form action="{% url "Product:cart-add" object.id %}" method="post">
+                                {% csrf_token %}
+                                {{ cart_product_form }}
+                                <input type="submit" value="add to cart" class="btn btn-primary">
+                            </form>
+        <p>{{ object.description }}</p>
+
+                   {% if object.image %}
+                    <img src='{{ object.image.url }}' class='img-fluid' />
+                {% endif %}
+        </div>
+        <div class='col-12 col-md-6'>
+            </div>
+    </div>
+
+
+{% endblock %}
+

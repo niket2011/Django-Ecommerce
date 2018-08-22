@@ -1,0 +1,24 @@
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'Product/style.css' %}">
+  <h2>Sign up</h2>
+      <div class="login-page">
+  <div class="form">
+      <form method="post" class=""register-form">
+  <
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit">Sign up</button>
+  </form>
+  </div></div>
+{% endblock %}

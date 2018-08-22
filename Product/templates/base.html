@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'Product/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+      <title>{% block head_title %}Base Template{% endblock %}</title>
+        {%  block search %}{%  endblock %}
+        {% include 'base/css.html' %}
+        <style>
+           .topright {
+
+               position: absolute;
+               top: 80px;
+               right: 16px;
+               font-size: 18px;
+           }
+            .topright1 {
+
+                position: absolute;
+                top: 80px;
+                right: 400px;
+                font-size: 18px;
+            }
+           .h1 {text-align:center;}
+           .center {
+     display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+
+
+
+        </style>
+    </head>
+
+    <body>
+      {% include 'base/navbar.html' with brand_name='GameStop' %}
+        <div class="body1">
+      <div class='container'>
+        {% if messages %}
+      <div class="alert alert-success messages">
+          {% for message in messages %}
+          <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+              {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+              {{ message }}<br/>
+          </span>
+          {% endfor %}
+      </div>
+      {% endif %}
+      </div>
+      <div class="container">
+    <div class="row" style="margin-top: 6%">
+        <div class="topright">
+         <button class="btn btn-info pull-right">
+            {% with totail_items=cart|length %}
+                {% if cart|length > 0 %}
+                    My Shopping Order:
+                    <a href="{% url "Product:cart-detail" %}" style="color: #ffffff">
+                        {{ totail_items }} item {{ totail_items|pluralize }},{{ cart.get_total_price }}$
+                    </a>
+                    {% else %}
+                    Your cart is empty.
+                {% endif %}
+            {% endwith %}
+         </button>
+        </div>
+    </div>
+</div>
+        </div>
+      {% block jumbotron %}{% endblock %}
+       {% block nik %}{% endblock %}
+      <div class="container">{% block content %}
+
+            {% endblock %}</div>
+
+        {% include 'base/js.html' %}
+        {% block javascript %}
+
+        {% endblock %}
+    </body>
+  </html>
